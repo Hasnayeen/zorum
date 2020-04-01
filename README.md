@@ -37,7 +37,7 @@ Komla is a modern take on forum software with user experience in mind. It is ope
 
 ## Screenshots <small>[↑Top](#about-komla)</small>
 
-Coming soon
+<img src="public/images/ui.png" alt="Komla" style="max-width:100%;">
 
 ## Contributing <small>[↑Top](#about-komla)</small>
 
