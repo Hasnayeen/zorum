@@ -61,8 +61,6 @@ If you discover a security vulnerability within Komla, please send an e-mail to 
 
 - [Full Contributors List](https://github.com/iluminar/komla/graphs/contributors)
 
-![](https://opencollective.com/komla/contributors.svg?width=890&button=false)
-
 ## License <small>[↑Top](#about-komla)</small>
 
 Komla is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).

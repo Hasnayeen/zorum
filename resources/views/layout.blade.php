@@ -226,6 +226,10 @@
 
                     {{-- Main Content Area --}}
                     <div class="flex-grow pl-8 py-4">
+                        <div class="bg-white rounded-md p-4 mb-4 shadow flex items-center justify-between">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-8 h-8 text-brand-600"><path d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"></path></svg>
+                            <button class="border-2 border-brand-600 text-brand-600 font-semibold px-4 py-2 rounded">Ask a Question</button>
+                        </div>
                         <div class="bg-white rounded-md shadow">
                             <div class="flex items-center w-full">
                                 <div class="flex-grow p-6 rounded-t-md">
@@ -465,6 +469,36 @@
                                     <a href="#" class="text-brand-600 underline">Learn More</a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="hidden bg-white max-w-4xl w-full h-full fixed right-0 shadow-2xl border-t flex flex-col text-gray-800">
+                        <div class="px-8 pb-4">
+                            <div class="flex pb-2">
+                                <div class="bg-indigo-600 text-white text-sm font-extrabold py-1 px-4 rounded-b">
+                                    Laravel
+                                </div>
+                            </div>
+                            <div class="flex items-center pt-4">
+                                <div class="h-8 flex items-center">
+                                    <img class="h-8 w-8 rounded-full" src="{{ asset('images/avatar.jpg') }}" alt="" />
+                                </div>
+                                <div class="pl-2 text-sm text-gray-700">
+                                    asked <span class="font-semibold">8 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="text-3xl py-2">
+                                Customizing the Laravel Verify email
+                            </div>
+                            <div class="pb-2 pt-4 leading-8">
+                                Hi, how can I change the <span class="text-sm bg-gray-200 text-orange-600 px-2 py-1 rounded">Best Regards and If you’re having trouble clicking the "Verify Email Address" button, copy and paste the URL below into your web browser:</span> text on the bottom of the email to something else?
+                            </div>
+                            <div class="py-2 flex items-center">
+                                <button class="border-2 border-brand-300 font-semibold text-sm text-brand-600 px-4 py-1 rounded-full mr-4">Reply</button>
+                                <button class="border-2 border-indigo-300 font-semibold text-sm text-indigo-600 px-4 py-1 rounded-full">Subscribe</button>
+                            </div>
+                        </div>
+                        <div class="flex-grow bg-gray-100 px-4">
                         </div>
                     </div>
                 </div>
