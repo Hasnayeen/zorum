@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('channels', function (Blueprint $table) {
-            $table->ulid('id')->primary()->index();
-            $table->string('name');
-            $table->string('description');
-            $table->string('group')->nullable();
-            $table->foreignUlid('hub_id')->constrained()->cascadeOnDelete();
+        Schema::create('tag_thread', function (Blueprint $table) {
             $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
-            $table->timestamps();
-            $table->softDeletes();
+            $table->foreignUlid('thread_id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('channels');
+        Schema::dropIfExists('hubs_user');
     }
 };

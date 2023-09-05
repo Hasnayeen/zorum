@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Tag extends Model
@@ -23,16 +25,6 @@ class Tag extends Model
         'hub_id',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'user_id' => 'integer',
-        'hub_id' => 'integer',
-    ];
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -41,5 +33,15 @@ class Tag extends Model
     public function hub(): BelongsTo
     {
         return $this->belongsTo(Hub::class);
+    }
+
+    public function channel(): HasOne
+    {
+        return $this->hasOne(Channel::class);
+    }
+
+    public function threads(): BelongsToMany
+    {
+        return $this->belongsToMany(Thread::class);
     }
 }
