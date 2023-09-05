@@ -2,6 +2,7 @@
 
 namespace App\Filament\Owner\Resources;
 
+use App\Enums\HubStatus;
 use App\Filament\Owner\Resources\HubResource\Pages;
 use App\Filament\Owner\Resources\HubResource\RelationManagers;
 use App\Models\Hub;
@@ -29,6 +30,9 @@ class HubResource extends Resource
                 Forms\Components\TextInput::make('description')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Select::make('status')
+                    ->options(HubStatus::values())
+                    ->required(),
             ]);
     }
 
@@ -36,12 +40,13 @@ class HubResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('status')
+                    ->badge()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -52,7 +57,8 @@ class HubResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),

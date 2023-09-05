@@ -2,16 +2,20 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\HasTenants;
+use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
-use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, HasTenants
 {
     use HasApiTokens, HasFactory, Notifiable, HasUlids;
 
@@ -46,6 +50,21 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => 'hashed',
     ];
 
+    public function getTenants(Panel $panel): Collection
+    {
+        return $this->hubs;
+    }
+
+    public function hubs(): BelongsToMany
+    {
+        return $this->belongsToMany(Hub::class);
+    }
+
+    public function canAccessTenant(Model $tenant): bool
+    {
+        return $this->hubs->contains($tenant);
+    }
+
     public function threads(): HasMany
     {
         return $this->hasMany(Threads::class);
@@ -69,10 +88,5 @@ class User extends Authenticatable implements MustVerifyEmail
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Roles::class);
-    }
-
-    public function hubs(): BelongsToMany
-    {
-        return $this->belongsToMany(Hubs::class);
     }
 }
