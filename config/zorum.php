@@ -4,6 +4,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Forum mode
+    |--------------------------------------------------------------------------
+    |
+    | This value determines whether or not the forum have single or multi hub.
+    | Hub is like community. So if set to true, users will be able to create
+    | their own hubs and manage them.
+    |
+    */
+
+    'multi_hub' => true,
+
+    /*
+    |--------------------------------------------------------------------------
     | Hub Approval
     |--------------------------------------------------------------------------
     |

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ThreadStatus;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -36,9 +37,7 @@ class Thread extends Model
      */
     protected $casts = [
         'published_at' => 'timestamp',
-        'user_id' => 'integer',
-        'hub_id' => 'integer',
-        'tag_id' => 'integer',
+        'status' => ThreadStatus::class,
     ];
 
     public function attachments(): MorphMany

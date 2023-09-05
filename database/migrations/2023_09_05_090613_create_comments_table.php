@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->ulid('id')->primary()->index();
+            $table->enum('editor', ['rich', 'markdown']);
             $table->longText('body');
             $table->string('status');
             $table->timestamp('published_at');

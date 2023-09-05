@@ -33,4 +33,9 @@ class Hub extends Model
     {
         return $this->hasMany(Channel::class);
     }
+
+    public function threads(): HasMany
+    {
+        return $this->hasMany(Thread::class);
+    }
 }
