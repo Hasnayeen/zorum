@@ -2,12 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Enums\ThreadStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use App\Models\Hub;
 use App\Models\Tag;
 use App\Models\Thread;
 use App\Models\User;
+use Illuminate\Support\Arr;
 
 class ThreadFactory extends Factory
 {
@@ -26,11 +28,10 @@ class ThreadFactory extends Factory
         return [
             'title' => $this->faker->sentence(4),
             'body' => $this->faker->text,
-            'status' => $this->faker->word,
+            'status' => Arr::random(ThreadStatus::cases()),
             'published_at' => $this->faker->dateTime(),
             'user_id' => User::factory(),
             'hub_id' => Hub::factory(),
-            'tag_id' => Tag::factory(),
         ];
     }
 }

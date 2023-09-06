@@ -2,9 +2,11 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use App\Models\Hub;
+use App\Enums\HubStatus;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 class HubFactory extends Factory
 {
@@ -23,6 +25,7 @@ class HubFactory extends Factory
         return [
             'name' => $this->faker->name,
             'description' => $this->faker->text,
+            'status' => Arr::random(HubStatus::cases()),
         ];
     }
 }
