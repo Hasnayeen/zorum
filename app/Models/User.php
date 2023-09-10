@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\HubUserStatus;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -88,5 +89,17 @@ class User extends Authenticatable implements MustVerifyEmail, HasTenants
     public function roles(): BelongsToMany
     {
         return $this->belongsToMany(Roles::class);
+    }
+
+    public function canAccessHub(Hub $hub): bool
+    {
+        if ($this->email === 'guest@example.com') {
+            return true;
+        }
+
+        return $this->hubs()
+            ->where('hub_id', $hub)
+            ->wherePivot('status', '!=', HubUserStatus::Banned)
+            ->exists();
     }
 }

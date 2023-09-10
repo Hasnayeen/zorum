@@ -1,7 +1,7 @@
 @php
-    $currentTenant = filament()->getTenant();
-    $currentTenantName = filament()->getTenantName($currentTenant);
-    $items = filament()->getTenantMenuItems();
+    $currentHub = request()->query('hub') ? zorum()->getHub(request()->query('hub')) : null;
+    $currentHubName = $currentHub ? zorum()->getHubName($currentHub) : __('Select a hub');
+    $items = zorum()->getHubMenuItems();
 
     $billingItem = $items['billing'] ?? null;
     $billingItemUrl = $billingItem?->getUrl();
@@ -16,14 +16,9 @@
     $profileItem = $items['profile'] ?? null;
     $profileItemUrl = $profileItem?->getUrl();
     $isProfileItemVisible = $profileItem?->isVisible() ?? true;
-    $hasProfileItem = ((filament()->hasTenantProfile() && filament()->getTenantProfilePage()::canView($currentTenant)) || filled($profileItemUrl)) && $isProfileItemVisible;
+    $hasProfileItem = ((filament()->hasTenantProfile() && filament()->getTenantProfilePage()::canView($currentHub)) || filled($profileItemUrl)) && $isProfileItemVisible;
 
-    $canSwitchTenants = count($tenants = array_filter(
-        filament()->getUserTenants(filament()->auth()->user()),
-        fn (\Illuminate\Database\Eloquent\Model $tenant): bool => ! $tenant->is($currentTenant),
-    ));
-
-    $items = \Illuminate\Support\Arr::except($items, ['billing', 'profile', 'register']);
+    $canSwitchHubs = count($hubs = zorum()->getHubsAccessibleToUser());
 @endphp
 
 {{ \Filament\Support\Facades\FilamentView::renderHook('panels::tenant-menu.before') }}
@@ -44,7 +39,7 @@
                     tooltip = $store.sidebar.isOpen
                         ? false
                         : {
-                              content: @js($currentTenantName),
+                              content: @js($currentHubName),
                               placement: document.dir === 'rtl' ? 'left' : 'right',
                               theme: $store.theme,
                           }
@@ -54,7 +49,15 @@
             type="button"
             class="fi-tenant-menu-trigger group flex w-full items-center justify-center gap-x-3 rounded-lg p-2 text-sm font-medium outline-none transition duration-75 hover:bg-gray-100 focus:bg-gray-100 dark:hover:bg-white/5 dark:focus:bg-white/5"
         >
-            <x-filament-panels::avatar.tenant :tenant="$currentTenant" />
+
+            <!-- TODO: Add hub avatar url -->
+            <x-filament::avatar
+                :src="#" 
+                :attributes="
+                    \Filament\Support\prepare_inherited_attributes($attributes)
+                        ->class(['fi-tenant-avatar rounded-md shrink-0'])
+                "
+            />
 
             <span
                 @if (filament()->isSidebarCollapsibleOnDesktop())
@@ -62,14 +65,14 @@
                 @endif
                 class="grid justify-items-start text-start"
             >
-                @if ($currentTenant instanceof \Filament\Models\Contracts\HasCurrentTenantLabel)
+                @if ($currentHub && $currentHub instanceof \Filament\Models\Contracts\HasCurrentTenantLabel)
                     <span class="text-xs text-gray-500 dark:text-gray-400">
-                        {{ $currentTenant->getCurrentTenantLabel() }}
+                        {{ $currentHub->getCurrentTenantLabel() }}
                     </span>
                 @endif
 
                 <span class="text-gray-950 dark:text-white">
-                    {{ $currentTenantName }}
+                    {{ $currentHubName }}
                 </span>
             </span>
 
@@ -123,7 +126,7 @@
         </x-filament::dropdown.list>
     @endif
 
-    @if ($canSwitchTenants)
+    @if ($canSwitchHubs)
         <x-filament::dropdown.list>
             @foreach ($tenants as $tenant)
                 <x-filament::dropdown.list.item

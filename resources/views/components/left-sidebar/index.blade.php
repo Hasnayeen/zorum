@@ -13,9 +13,7 @@
     x-cloak="-lg"
     x-bind:class="$store.sidebar.isOpen ? @js($openSidebarClasses) : '-translate-x-full rtl:translate-x-full'"
     @class([
-        'fixed inset-y-0 z-30 grid h-screen w-[--sidebar-width] content-start bg-white transition-all dark:bg-gray-900 lg:z-0 lg:bg-white/50 lg:shadow-none lg:ring-1 lg:ring-gray-950/5 dark:lg:ring-white/10 dark:lg:bg-transparent',
-        'start-0' => $side === 'left',
-        'end-0' => $side === 'right',
+        'fixed inset-y-0 start-0 z-30 grid h-screen w-[--sidebar-width] content-start bg-white transition-all dark:bg-gray-900 lg:z-0 lg:bg-white/50 lg:shadow-none lg:ring-1 lg:ring-gray-950/5 dark:lg:ring-white/10 dark:lg:bg-transparent',
     ])
 >
     <header
@@ -54,23 +52,16 @@
     >
         {{ \Filament\Support\Facades\FilamentView::renderHook('panels::sidebar.nav.start') }}
 
-        @if (filament()->hasTenancy())
-            <div
-                @class([
-                    '-mx-2' => ! filament()->isSidebarCollapsibleOnDesktop(),
-                ])
-                @if (filament()->isSidebarCollapsibleOnDesktop())
-                    x-bind:class="$store.sidebar.isOpen ? '-mx-2' : '-mx-4'"
-                @endif
-            >
-                <x-filament-panels::tenant-menu />
+        @if (request()->query('hub') && zorum()->hasHubs())
+            <div>
+                <x-hub-menu />
             </div>
         @endif
 
         @if (filament()->hasNavigation())
             <ul class="-mx-2 flex flex-col gap-y-7">
                 @foreach ($navigation as $group)
-                    <x-sidebar.group
+                    <x-left-sidebar.group
                         :collapsible="$group->isCollapsible()"
                         :icon="$group->getIcon()"
                         :items="$group->getItems()"

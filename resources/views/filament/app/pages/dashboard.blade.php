@@ -1,4 +1,4 @@
 <x-filament-panels::page>
-    <x-sidebar :navigation="$this->navigation" />
-    <x-sidebar :navigation="$this->navigation" side="right" />
+    <x-left-sidebar :navigation="$this->navigation" />
+    <x-right-sidebar :navigation="$this->navigation" />
 </x-filament-panels::page>

@@ -26,13 +26,25 @@ class Dashboard extends BasePage
     public function navigation()
     {
         return [
-            NavigationGroup::make('')
-                ->collapsible(false)
+            NavigationGroup::make('Pinned Hubs')
+                ->collapsible(true)
                 ->items([
-                    // NavigationItem::make('Dashboard')
-                    //     ->icon('heroicon-o-home')
-                    //     ->isActiveWhen(fn (): bool => request()->routeIs('filament.app.pages.dashboard'))
-                    //     ->url(fn (): string => Dashboard::getUrl()),
+                    NavigationItem::make('Meta')
+                        ->icon('heroicon-o-at-symbol')
+                        ->url(fn (): string => Dashboard::getUrl()),
+                    NavigationItem::make('Laravel')
+                        ->icon('heroicon-o-at-symbol')
+                        ->url(fn (): string => Dashboard::getUrl()),
+                ]),
+            NavigationGroup::make('Popular Hubs')
+                ->collapsible(true)
+                ->items([
+                    NavigationItem::make('Livewire')
+                        ->icon('heroicon-o-at-symbol')
+                        ->url(fn (): string => Dashboard::getUrl()),
+                    NavigationItem::make('Filament')
+                        ->icon('heroicon-o-at-symbol')
+                        ->url(fn (): string => Dashboard::getUrl()),
                 ]),
         ];
     }

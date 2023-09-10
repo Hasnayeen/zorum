@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('hubs', function (Blueprint $table) {
             $table->ulid('id')->primary()->index();
             $table->string('name');
+            $table->string('slug');
             $table->string('description');
             $table->string('status')->default(config('zorum.requires_approval') ? HubStatus::Pending : HubStatus::Active);
             $table->timestamps();
