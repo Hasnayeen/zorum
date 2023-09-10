@@ -26,13 +26,23 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->path('')
             ->colors([
-                'primary' => Color::Violet,
+                'primary' => [
+                    50 => '#fff9f5',
+                    100 => '#ffe6d5',
+                    200 => '#fecaaa',
+                    300 => '#fda574',
+                    400 => '#fb743c',
+                    500 => '#f95016',
+                    600 => '#ea350c',
+                    700 => '#c2250c',
+                    800 => '#9a1f12',
+                    900 => '#7c1d12',
+                    950 => '#430b07',
+                ],
             ])
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\\Filament\\App\\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\\Filament\\App\\Pages')
-            ->pages([
-                Pages\Dashboard::class,
-            ])
+            ->pages([])
             ->discoverWidgets(in: app_path('Filament/App/Widgets'), for: 'App\\Filament\\App\\Widgets')
             ->widgets([])
             ->middleware([
@@ -50,6 +60,11 @@ class AppPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->login()
-            ->registration();
+            ->registration()
+            ->databaseNotifications()
+            ->topNavigation()
+            ->sidebarCollapsibleOnDesktop(false)
+            ->favicon(asset('favicon.svg'))
+            ->viteTheme('resources/css/app.css');
     }
 }
