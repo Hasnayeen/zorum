@@ -30,20 +30,20 @@ class Dashboard extends BasePage
                 ->collapsible(true)
                 ->items([
                     NavigationItem::make('Meta')
-                        ->icon('heroicon-o-at-symbol')
+                        ->icon('icon-at-sign')
                         ->url(fn (): string => Dashboard::getUrl()),
                     NavigationItem::make('Laravel')
-                        ->icon('heroicon-o-at-symbol')
+                        ->icon('icon-at-sign')
                         ->url(fn (): string => Dashboard::getUrl()),
                 ]),
             NavigationGroup::make('Popular Hubs')
                 ->collapsible(true)
                 ->items([
                     NavigationItem::make('Livewire')
-                        ->icon('heroicon-o-at-symbol')
+                        ->icon('icon-at-sign')
                         ->url(fn (): string => Dashboard::getUrl()),
                     NavigationItem::make('Filament')
-                        ->icon('heroicon-o-at-symbol')
+                        ->icon('icon-at-sign')
                         ->url(fn (): string => Dashboard::getUrl()),
                 ]),
         ];

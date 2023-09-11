@@ -17,7 +17,7 @@ class HubResource extends Resource
 {
     protected static ?string $model = Hub::class;
     protected static ?string $recordTitleAttribute = 'name';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'icon-network';
 
     public static function form(Form $form): Form
     {
