@@ -2,6 +2,7 @@
 
 namespace App\Filament\App\Pages;
 
+use App\Filament\App\Widgets\LatestThreads;
 use Livewire\Attributes\Computed;
 use Filament\Pages\Dashboard as BasePage;
 use Filament\Navigation\NavigationItem;
@@ -46,6 +47,13 @@ class Dashboard extends BasePage
                         ->icon('icon-at-sign')
                         ->url(fn (): string => Dashboard::getUrl()),
                 ]),
+        ];
+    }
+
+    public function getVisibleHeaderWidgets(): array
+    {
+        return [
+            LatestThreads::make(),
         ];
     }
 }

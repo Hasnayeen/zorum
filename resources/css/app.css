@@ -9,3 +9,7 @@ body {
 .fi-main {
     @apply max-w-full;
 }
+
+.fi-page {
+    @apply ms-[--sidebar-width] me-[--sidebar-width];
+}
