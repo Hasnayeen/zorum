@@ -63,6 +63,7 @@ class AppPanelProvider extends PanelProvider
             ])
             ->login()
             ->registration()
+            ->homeUrl('/')
             ->databaseNotifications()
             ->topNavigation()
             ->sidebarCollapsibleOnDesktop(false)

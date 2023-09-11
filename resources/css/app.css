@@ -2,6 +2,10 @@
 
 @config '../../tailwind.config.js';
 
+:root {
+    --zorum-sidebar-width: 16rem;
+}
+
 body {
     @apply !bg-primary-50;
 }
@@ -10,6 +14,10 @@ body {
     @apply max-w-full;
 }
 
+.fi-main aside {
+    @apply max-w-[--zorum-sidebar-width];
+}
+
 .fi-page {
-    @apply ms-[--sidebar-width] me-[--sidebar-width];
+    @apply ms-[--zorum-sidebar-width] me-[--zorum-sidebar-width];
 }

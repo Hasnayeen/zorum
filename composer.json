@@ -1,12 +1,20 @@
 {
-    "name": "laravel/laravel",
+    "name": "hasnayeen/zorum",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "A modern take on forum software built on Laravel and Filament",
     "keywords": [
         "laravel",
-        "framework"
+        "filament",
+        "forum"
     ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Nehal Hasnayeen",
+            "email": "searching.nehal@gmail.com",
+            "homepage": "https://hasnyeen.com"
+        }
+    ],
     "require": {
         "php": "^8.1",
         "filament/filament": "^3.0-stable",
