@@ -67,6 +67,7 @@ class AppPanelProvider extends PanelProvider
             ->databaseNotifications()
             ->topNavigation()
             ->sidebarCollapsibleOnDesktop(false)
+            ->sidebarFullyCollapsibleOnDesktop(false)
             ->favicon(asset('favicon.svg'))
             ->viteTheme('resources/css/app.css');
     }

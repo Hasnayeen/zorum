@@ -10,14 +10,30 @@ body {
     @apply !bg-primary-50;
 }
 
-.fi-main {
-    @apply max-w-full;
-}
+/* .fi-main {
+    @apply ms-[--zorum-sidebar-width] me-[--zorum-sidebar-width];
+} */
 
 .fi-main aside {
     @apply max-w-[--zorum-sidebar-width];
 }
 
+.fi-main aside header {
+    @apply ring-0 shadow-none;
+}
+
 .fi-page {
-    @apply ms-[--zorum-sidebar-width] me-[--zorum-sidebar-width];
+    @apply max-w-2xl xl:max-w-4xl mx-auto;
+}
+
+.zorum-heading .fi-in-text-item {
+    @apply !text-3xl;
+}
+
+.zorum-in-grid .fi-in-component-ctn {
+    @apply gap-0;
+}
+
+.zorum-tags ul div {
+    @apply flex flex-wrap;
 }

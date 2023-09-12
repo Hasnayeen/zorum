@@ -33,8 +33,6 @@ class Comment extends Model
      */
     protected $casts = [
         'published_at' => 'timestamp',
-        'user_id' => 'integer',
-        'thread_id' => 'integer',
     ];
 
     public function attachments(): MorphMany

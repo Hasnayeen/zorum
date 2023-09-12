@@ -3,11 +3,12 @@
 namespace App\Filament\App\Pages;
 
 use App\Filament\App\Widgets\LatestThreads;
-use Livewire\Attributes\Computed;
-use Filament\Pages\Dashboard as BasePage;
-use Filament\Navigation\NavigationItem;
+use Filament\Actions;
 use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
+use Filament\Pages\Dashboard as BasePage;
 use Illuminate\Contracts\Support\Htmlable;
+use Livewire\Attributes\Computed;
 
 class Dashboard extends BasePage
 {
@@ -15,7 +16,7 @@ class Dashboard extends BasePage
 
     public function getTitle(): string|Htmlable
     {
-        return '';
+        return ' ';
     }
 
     public static function shouldRegisterNavigation(): bool
@@ -54,6 +55,14 @@ class Dashboard extends BasePage
     {
         return [
             LatestThreads::make(),
+        ];
+    }
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make()
+                ->label('New Thread'),
         ];
     }
 }
