@@ -37,12 +37,12 @@ class Comment extends Model
 
     public function attachments(): MorphMany
     {
-        return $this->morphMany(Attachments::class, 'attachmentable');
+        return $this->morphMany(Attachment::class, 'attachable');
     }
 
     public function reactions(): MorphMany
     {
-        return $this->morphMany(Reactions::class, 'reactionable');
+        return $this->morphMany(Reaction::class, 'reactable');
     }
 
     public function user(): BelongsTo

@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('reactions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->string('type');
             $table->foreignUlid('user_id')->constrained()->cascadeOnDelete();
-            $table->unsignedBigInteger('reactable_id');
+            $table->ulid('reactable_id');
             $table->string('reactable_type');
             $table->timestamps();
         });

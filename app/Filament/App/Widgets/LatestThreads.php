@@ -2,18 +2,19 @@
 
 namespace App\Filament\App\Widgets;
 
+use App\Enums\ReactionType;
 use App\Infolists\Components\ThreadAuthorEntry;
+use App\Infolists\Components\ThreadStatEntry;
 use App\Models\Thread;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Infolists\Components\Actions\Action;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\TextEntry\TextEntrySize;
 use Filament\Infolists\Concerns\InteractsWithInfolists;
 use Filament\Infolists\Contracts\HasInfolists;
 use Filament\Infolists\Infolist;
-use Filament\Tables;
-use Filament\Tables\Columns\Layout\Grid;
 use Filament\Tables\Table;
 use Filament\Widgets\TableWidget as BaseWidget;
 
@@ -73,6 +74,12 @@ class LatestThreads extends BaseWidget implements HasForms, HasInfolists
                                     ->label('')
                                     ->size(TextEntrySize::Small),
                             ]),
+                        ThreadStatEntry::make('reactions')
+                            ->label('')
+                            ->registerActions([
+                                Action::make('reply')
+                                    ->color('gray'),
+                            ])
                     ])
             ]);
     }
@@ -82,6 +89,11 @@ class LatestThreads extends BaseWidget implements HasForms, HasInfolists
         return $table
             ->query(
                 Thread::query()
+                    ->withCount([
+                        'reactions as upvote' => fn ($query) => $query->where('type', ReactionType::Upvote),
+                        'reactions as downvote' => fn ($query) => $query->where('type', ReactionType::Downvote),
+                        'comments',
+                    ])
                     ->latest()
                     ->limit(10)
             );

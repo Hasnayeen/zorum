@@ -44,9 +44,4 @@ class Attachment extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function attachable(): BelongsTo
-    {
-        return $this->belongsTo(Attachable::class);
-    }
 }

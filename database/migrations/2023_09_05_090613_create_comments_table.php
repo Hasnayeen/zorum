@@ -17,6 +17,7 @@ return new class extends Migration
             $table->longText('body');
             $table->string('status');
             $table->timestamp('published_at');
+            $table->boolean('marked_as_solution')->default(false);
             $table->foreignUlid('user_id')->constrained()->cascadeOnDelete();
             $table->foreignUlid('thread_id')->constrained()->cascadeOnDelete();
             $table->timestamps();

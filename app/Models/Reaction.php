@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ReactionType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,7 +18,6 @@ class Reaction extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
         'type',
         'user_id',
         'reactable_id',
@@ -31,8 +31,7 @@ class Reaction extends Model
      */
     protected $casts = [
         'id' => 'integer',
-        'user_id' => 'integer',
-        'reactable_id' => 'integer',
+        'type' => ReactionType::class,
     ];
 
     public function reactable(): MorphTo
@@ -43,10 +42,5 @@ class Reaction extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
-    }
-
-    public function reactable(): BelongsTo
-    {
-        return $this->belongsTo(Reactable::class);
     }
 }
