@@ -2,11 +2,10 @@
 
 namespace App\Filament\App\Widgets;
 
+use App\Infolists\Components\ThreadAuthorEntry;
 use App\Models\Thread;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Infolists\Components\Grid as ComponentsGrid;
-use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\RepeatableEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Components\TextEntry\TextEntrySize;
@@ -30,7 +29,7 @@ class LatestThreads extends BaseWidget implements HasForms, HasInfolists
     {
         return $infolist
             ->state([
-                'threads' => $this->getTableRecords()
+                'threads' => $this->getTableRecords(),
             ])
             ->schema([
                 RepeatableEntry::make('threads')
@@ -51,36 +50,13 @@ class LatestThreads extends BaseWidget implements HasForms, HasInfolists
                         TextEntry::make('body')
                             ->label('')
                             ->size(TextEntrySize::Small),
-                        ComponentsGrid::make(12)
-                            ->schema([
-                                ImageEntry::make('user.avatar')
-                                    ->columnSpan(1)
-                                    ->label('')
-                                    ->defaultImageUrl('https://unavatar.io/sindresorhus@gmail.com')
-                                    ->size(48)
-                                    ->circular()
-                                    ->extraImgAttributes([
-                                        'alt' => 'user avatar',
-                                        'loading' => 'lazy',
-                                    ]),
-                                ComponentsGrid::make(1)
-                                    ->columnStart(2)
-                                    ->extraAttributes([
-                                        'class' => 'zorum-in-grid',
-                                    ])
-                                    ->schema([
-                                        TextEntry::make('user.name')
-                                            ->label('')
-                                            ->extraAttributes([
-                                                'class' => 'font-semibold',
-                                            ])
-                                            ->url(fn (Thread $thread) => url('users/' . $thread->user->id)),
-                                        TextEntry::make('created_at')
-                                            ->label('')
-                                            ->size(TextEntrySize::Small)
-                                            ->getStateUsing(fn (Thread $thread) => $thread->created_at->diffForHumans()),
-                                    ]),
-                        ]),
+                        ThreadAuthorEntry::make('user')
+                            ->label('')
+                            ->defaultImageUrl(fn (Thread $thread) => 'https://unavatar.io/' . $thread->user->email)
+                            ->extraImgAttributes([
+                                'alt' => 'user avatar',
+                                'loading' => 'lazy',
+                            ]),
                         RepeatableEntry::make('tags')
                             ->label('')
                             ->contained(false)
@@ -92,7 +68,7 @@ class LatestThreads extends BaseWidget implements HasForms, HasInfolists
                                     ->columnSpan(1)
                                     ->badge()
                                     ->icon('icon-tag')
-                                    ->color('info')
+                                    ->color('gray')
                                     ->url(fn (Thread $thread) => url('tags/' . $thread->tag?->id))
                                     ->label('')
                                     ->size(TextEntrySize::Small),
@@ -108,20 +84,6 @@ class LatestThreads extends BaseWidget implements HasForms, HasInfolists
                 Thread::query()
                     ->latest()
                     ->limit(10)
-            )
-            ->columns([
-                Grid::make(4)
-                    ->schema([
-                        Tables\Columns\TextColumn::make('title')
-                            ->searchable()
-                            ->sortable(),
-                        Tables\Columns\TextColumn::make('user.name')
-                            ->searchable()
-                            ->sortable(),
-                        Tables\Columns\TextColumn::make('created_at')
-                            ->dateTime()
-                            ->sortable(),
-                    ])
-            ]);
+            );
     }
 }

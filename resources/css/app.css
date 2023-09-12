@@ -30,10 +30,6 @@ body {
     @apply !text-3xl;
 }
 
-.zorum-in-grid .fi-in-component-ctn {
-    @apply gap-0;
-}
-
 .zorum-tags ul div {
     @apply flex flex-wrap;
 }
