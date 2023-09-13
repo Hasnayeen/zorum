@@ -25,7 +25,7 @@
                 {{ $author->name }}
             </span>
             <span class="text-xs">
-                {{ $author->company ?? 'N/A' }}
+                {{ $getRecord()->created_at->diffForHumans() }}
             </span>
         </div>
     </div>

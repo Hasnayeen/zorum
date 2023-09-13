@@ -33,3 +33,7 @@ body {
 .zorum-tags ul div {
     @apply flex flex-wrap;
 }
+
+.zorum .fi-pagination {
+    @apply grid-flow-col grid-cols-none;
+}

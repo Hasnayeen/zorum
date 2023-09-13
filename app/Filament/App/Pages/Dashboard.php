@@ -3,7 +3,6 @@
 namespace App\Filament\App\Pages;
 
 use App\Filament\App\Widgets\LatestThreads;
-use Filament\Actions;
 use Filament\Navigation\NavigationGroup;
 use Filament\Navigation\NavigationItem;
 use Filament\Pages\Dashboard as BasePage;
@@ -55,14 +54,6 @@ class Dashboard extends BasePage
     {
         return [
             LatestThreads::make(),
-        ];
-    }
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\CreateAction::make()
-                ->label('New Thread'),
         ];
     }
 }
